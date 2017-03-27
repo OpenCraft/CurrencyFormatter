@@ -1,0 +1,22 @@
+{
+  "name": "CurrencyFormatter",
+  "version": "0.1.0",
+  "summary": "A short description of CurrencyFormatter.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/henrique-morbin-ilegra/CurrencyFormatter",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "henrique-morbin-ilegra": "morbin_@hotmail.com"
+  },
+  "source": {
+    "git": "https://github.com/henrique-morbin-ilegra/CurrencyFormatter.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "CurrencyFormatter/Classes/**/*"
+}

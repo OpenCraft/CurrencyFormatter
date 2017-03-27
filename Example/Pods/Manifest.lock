@@ -1,0 +1,16 @@
+PODS:
+  - CurrencyFormatter (0.1.0)
+
+DEPENDENCIES:
+  - CurrencyFormatter (from `../`)
+
+EXTERNAL SOURCES:
+  CurrencyFormatter:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CurrencyFormatter: 5be76fcc3226a058289982b2a77b823054d85364
+
+PODFILE CHECKSUM: 0d6be387333f7bd7106596a7b4febda860a5007a
+
+COCOAPODS: 1.2.0

@@ -1,0 +1,6 @@
+framework module Pods_CurrencyFormatter_Tests {
+  umbrella header "Pods-CurrencyFormatter_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
