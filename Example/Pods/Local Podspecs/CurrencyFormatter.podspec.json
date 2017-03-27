@@ -1,19 +1,19 @@
 {
   "name": "CurrencyFormatter",
-  "version": "0.1.0",
-  "summary": "A short description of CurrencyFormatter.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/henrique-morbin-ilegra/CurrencyFormatter",
+  "version": "1.0.0",
+  "summary": "A simple currency formatter.",
+  "description": "A simple currency formatter. Can be used to format UITextField too.",
+  "homepage": "https://github.com/OpenCraft/CurrencyFormatter",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "henrique-morbin-ilegra": "morbin_@hotmail.com"
+    "Henrique Morbin": "morbin_@hotmail.com"
   },
   "source": {
-    "git": "https://github.com/henrique-morbin-ilegra/CurrencyFormatter.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/OpenCraft/CurrencyFormatter.git",
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "8.0"
