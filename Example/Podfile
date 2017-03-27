@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'CurrencyFormatter_Example' do
+  pod 'CurrencyFormatter', :path => '../'
+
+  target 'CurrencyFormatter_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
