@@ -23,7 +23,7 @@ public class CurrencyFormatter {
         case real = "R$ "
     }
     
-    public let doubleValue: Double
+    //public let doubleValue: Double
     public var decimalSeparator = Separator.dot
     public var thousandSeparator = Separator.comma
     public var prefix = Prefix.none
@@ -31,37 +31,53 @@ public class CurrencyFormatter {
     public var integersAttributes: [String : Any]?
     public var decimalsAttributes: [String : Any]?
     
-    public init(value: Double) {
-        doubleValue = value
-    }
+    public init() {}
     
-    public convenience init(textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) {
-        let oldText = (textField.text ?? "0") as NSString
-        let editedText = oldText.replacingCharacters(in: range, with: string)
-        self.init(textValue: editedText)
-    }
+    // MARK: Double Representation
     
-    public convenience init(textValue: String) {
+    public func double(from textValue: String) -> Double {
         let cleannedText = textValue.cleanned
         let doubleValue = (Double(cleannedText) ?? 0)/100
-        self.init(value: doubleValue)
+        return doubleValue
     }
     
-    // MARK: Methods
-    
-    public var toString: String {
-        return toAttributedString.string
+    public func double(from textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Double {
+        let oldText = (textField.text ?? "0") as NSString
+        let editedText = oldText.replacingCharacters(in: range, with: string)
+        return double(from: editedText)
     }
     
-    public var toAttributedString: NSAttributedString {
+    // MARK: Integer Representation
+    
+    fileprivate func integerPart(from doubleValue: Double) -> Int {
+        let numberOfPlaces = 2.0
+        let multiplier = pow(10.0, numberOfPlaces)
+        let rounded = round(doubleValue * multiplier) / multiplier
+        
+        return Int(rounded)
+    }
+    
+    // MARK: Decimal Representation
+    
+    fileprivate func decimalPart(from doubleValue: Double) -> Int {
+        let numberOfPlace1s = 3.0
+        let multiplier1 = pow(10.0, numberOfPlace1s)
+        let rounded1 = round(doubleValue * multiplier1) / multiplier1
+        
+        return Int(rounded1 * multiplier1) - (integerPart(from: doubleValue) * Int(multiplier1))
+    }
+    
+    // MARK: Attributed String
+    
+    public func attributedString(from doubleValue: Double) -> NSAttributedString {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.groupingSeparator = thousandSeparator.rawValue
         formatter.usesGroupingSeparator = true
         formatter.maximumFractionDigits = 0
-       
-        let integerText = formatter.string(from: NSNumber(value: integerRepresentation)) ?? "0"
-        var decimalText = String(format: "%03d", decimalRepresentation)
+        
+        let integerText = formatter.string(from: NSNumber(value: integerPart(from: doubleValue))) ?? "0"
+        var decimalText = String(format: "%03d", decimalPart(from: doubleValue))
         decimalText.remove(at: decimalText.index(before: decimalText.endIndex))
         
         let attrText = NSMutableAttributedString()
@@ -73,20 +89,30 @@ public class CurrencyFormatter {
         return attrText
     }
     
-    public var integerRepresentation: Int {
-        let numberOfPlaces = 2.0
-        let multiplier = pow(10.0, numberOfPlaces)
-        let rounded = round(doubleValue * multiplier) / multiplier
-        
-        return Int(rounded)
+    public func attributedString(from textValue: String) -> NSAttributedString {
+        let doubleValue = double(from: textValue)
+        return attributedString(from: doubleValue)
     }
     
-    public var decimalRepresentation: Int {
-        let numberOfPlace1s = 3.0
-        let multiplier1 = pow(10.0, numberOfPlace1s)
-        let rounded1 = round(doubleValue * multiplier1) / multiplier1
-        
-        return Int(rounded1 * multiplier1) - (integerRepresentation * Int(multiplier1))
+    public func attributedString(from textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> NSAttributedString {
+        let doubleValue = double(from: textField, shouldChangeCharactersIn: range, replacementString: string)
+        return attributedString(from: doubleValue)
+    }
+    
+    // MARK: String
+    
+    public func string(from doubleValue: Double) -> String {
+        return attributedString(from: doubleValue).string
+    }
+    
+    public func string(from textValue: String) -> String {
+        let doubleValue = double(from: textValue)
+        return attributedString(from: doubleValue).string
+    }
+    
+    public func string(from textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> String {
+        let doubleValue = double(from: textField, shouldChangeCharactersIn: range, replacementString: string)
+        return attributedString(from: doubleValue).string
     }
 }
 

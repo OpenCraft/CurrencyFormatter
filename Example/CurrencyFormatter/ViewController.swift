@@ -11,6 +11,9 @@ import CurrencyFormatter
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var lblInteger: UILabel!
+    @IBOutlet weak var lblDecimal: UILabel!
+    @IBOutlet weak var lblString: UILabel!
     // MARK: Methods
 
     fileprivate final func attributes(forSize size: Double, isBold: Bool, color: UIColor) -> [String : Any]? {
@@ -26,7 +29,7 @@ class ViewController: UIViewController {
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let formatter = CurrencyFormatter(textField: textField, shouldChangeCharactersIn: range, replacementString: string)
+        let formatter = CurrencyFormatter()
         formatter.decimalSeparator = .comma
         formatter.thousandSeparator = .dot
         formatter.prefix = .real
@@ -34,7 +37,9 @@ extension ViewController: UITextFieldDelegate {
         formatter.integersAttributes = attributes(forSize: 24, isBold: true, color: .blue)
         formatter.decimalsAttributes = attributes(forSize: 16, isBold: true, color: .green)
         
-        textField.attributedText = formatter.toAttributedString
+        lblString.text = "\(formatter.string(from: textField, shouldChangeCharactersIn: range, replacementString: string))"
+        
+        textField.attributedText = formatter.attributedString(from: textField, shouldChangeCharactersIn: range, replacementString: string)
         
         return false
     }
