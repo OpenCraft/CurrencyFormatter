@@ -73,7 +73,7 @@ public class CurrencyFormatter {
         return attrText
     }
     
-    fileprivate final var integerRepresentation: Int {
+    public var integerRepresentation: Int {
         let numberOfPlaces = 2.0
         let multiplier = pow(10.0, numberOfPlaces)
         let rounded = round(doubleValue * multiplier) / multiplier
@@ -81,7 +81,7 @@ public class CurrencyFormatter {
         return Int(rounded)
     }
     
-    fileprivate final var decimalRepresentation: Int {
+    public var decimalRepresentation: Int {
         let numberOfPlace1s = 3.0
         let multiplier1 = pow(10.0, numberOfPlace1s)
         let rounded1 = round(doubleValue * multiplier1) / multiplier1
