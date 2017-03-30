@@ -51,11 +51,9 @@ public class CurrencyFormatter {
     }
     
     public var toAttributedString: NSAttributedString {
-        let integer = Int(trunc(doubleValue))
-        let decimal = Int((doubleValue - trunc(doubleValue)) * 100)
-        
-        let integerText = "\(integer)"
-        let decimalText = String(format: "%02d", decimal)
+        let integerText = "\(integerRoundedRepresentation)"
+        var decimalText = String(format: "%03d", decimalRoundedRepresentation)
+        decimalText.remove(at: decimalText.index(before: decimalText.endIndex))
         
         let attrText = NSMutableAttributedString()
         attrText.append(NSAttributedString(string: prefix.rawValue, attributes: prefixAttributes))
@@ -64,6 +62,22 @@ public class CurrencyFormatter {
         attrText.append(NSAttributedString(string: decimalText, attributes: decimalsAttributes))
         
         return attrText
+    }
+    
+    fileprivate final var integerRoundedRepresentation: Int {
+        let numberOfPlaces = 2.0
+        let multiplier = pow(10.0, numberOfPlaces)
+        let rounded = round(doubleValue * multiplier) / multiplier
+        
+        return Int(rounded)
+    }
+    
+    fileprivate final var decimalRoundedRepresentation: Int {
+        let numberOfPlace1s = 3.0
+        let multiplier1 = pow(10.0, numberOfPlace1s)
+        let rounded1 = round(doubleValue * multiplier1) / multiplier1
+        
+        return Int(rounded1 * multiplier1) - (integerRoundedRepresentation * Int(multiplier1))
     }
 }
 
