@@ -27,7 +27,8 @@ extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let formatter = CurrencyFormatter(textField: textField, shouldChangeCharactersIn: range, replacementString: string)
-        formatter.separator = .comma
+        formatter.decimalSeparator = .comma
+        formatter.thousandSeparator = .dot
         formatter.prefix = .real
         formatter.prefixAttributes = attributes(forSize: 16, isBold: false, color: .red)
         formatter.integersAttributes = attributes(forSize: 24, isBold: true, color: .blue)

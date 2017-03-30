@@ -11,8 +11,10 @@ import Foundation
 public class CurrencyFormatter {
     
     public enum Separator: String {
+        case none = ""
         case dot = "."
         case comma = ","
+        case space = " "
     }
     
     public enum Prefix: String {
@@ -22,7 +24,8 @@ public class CurrencyFormatter {
     }
     
     public let doubleValue: Double
-    public var separator = Separator.dot
+    public var decimalSeparator = Separator.dot
+    public var thousandSeparator = Separator.comma
     public var prefix = Prefix.none
     public var prefixAttributes: [String : Any]?
     public var integersAttributes: [String : Any]?
@@ -47,24 +50,30 @@ public class CurrencyFormatter {
     // MARK: Methods
     
     public var toString: String {
-        return String(format: "%@%.2f", prefix.rawValue, doubleValue).replacingOccurrences(of: ".", with: separator.rawValue)
+        return toAttributedString.string
     }
     
     public var toAttributedString: NSAttributedString {
-        let integerText = "\(integerRoundedRepresentation)"
-        var decimalText = String(format: "%03d", decimalRoundedRepresentation)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = thousandSeparator.rawValue
+        formatter.usesGroupingSeparator = true
+        formatter.maximumFractionDigits = 0
+       
+        let integerText = formatter.string(from: NSNumber(value: integerRepresentation)) ?? "0"
+        var decimalText = String(format: "%03d", decimalRepresentation)
         decimalText.remove(at: decimalText.index(before: decimalText.endIndex))
         
         let attrText = NSMutableAttributedString()
         attrText.append(NSAttributedString(string: prefix.rawValue, attributes: prefixAttributes))
         attrText.append(NSAttributedString(string: integerText, attributes: integersAttributes))
-        attrText.append(NSAttributedString(string: ",", attributes: decimalsAttributes))
+        attrText.append(NSAttributedString(string: decimalSeparator.rawValue, attributes: decimalsAttributes))
         attrText.append(NSAttributedString(string: decimalText, attributes: decimalsAttributes))
         
         return attrText
     }
     
-    fileprivate final var integerRoundedRepresentation: Int {
+    fileprivate final var integerRepresentation: Int {
         let numberOfPlaces = 2.0
         let multiplier = pow(10.0, numberOfPlaces)
         let rounded = round(doubleValue * multiplier) / multiplier
@@ -72,12 +81,12 @@ public class CurrencyFormatter {
         return Int(rounded)
     }
     
-    fileprivate final var decimalRoundedRepresentation: Int {
+    fileprivate final var decimalRepresentation: Int {
         let numberOfPlace1s = 3.0
         let multiplier1 = pow(10.0, numberOfPlace1s)
         let rounded1 = round(doubleValue * multiplier1) / multiplier1
         
-        return Int(rounded1 * multiplier1) - (integerRoundedRepresentation * Int(multiplier1))
+        return Int(rounded1 * multiplier1) - (integerRepresentation * Int(multiplier1))
     }
 }
 
