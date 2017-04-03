@@ -14,6 +14,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblInteger: UILabel!
     @IBOutlet weak var lblDecimal: UILabel!
     @IBOutlet weak var lblString: UILabel!
+    
+    fileprivate lazy var formatter: CurrencyFormatter = {
+        let formatter = CurrencyFormatter()
+        formatter.decimalSeparator = .comma
+        formatter.thousandSeparator = .dot
+        formatter.prefix = .real
+        formatter.prefixAttributes = self.attributes(forSize: 16, isBold: false, color: .red)
+        formatter.integersAttributes = self.attributes(forSize: 24, isBold: true, color: .blue)
+        formatter.decimalsAttributes = self.attributes(forSize: 16, isBold: true, color: .green)
+        return formatter
+    }()
+    
+    // MARK: Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        lblString.text = formatter.string(from: -1850.98)
+    }
+    
     // MARK: Methods
 
     fileprivate final func attributes(forSize size: Double, isBold: Bool, color: UIColor) -> [String : Any]? {
@@ -28,14 +48,6 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        let formatter = CurrencyFormatter()
-        formatter.decimalSeparator = .comma
-        formatter.thousandSeparator = .dot
-        formatter.prefix = .real
-        formatter.prefixAttributes = attributes(forSize: 16, isBold: false, color: .red)
-        formatter.integersAttributes = attributes(forSize: 24, isBold: true, color: .blue)
-        formatter.decimalsAttributes = attributes(forSize: 16, isBold: true, color: .green)
         
         lblString.text = "\(formatter.string(from: textField, shouldChangeCharactersIn: range, replacementString: string))"
         
