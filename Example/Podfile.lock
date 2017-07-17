@@ -1,16 +1,16 @@
 PODS:
-  - CurrencyFormatter (1.0.0)
+  - CurrencyFormatter (2.0.1)
 
 DEPENDENCIES:
   - CurrencyFormatter (from `../`)
 
 EXTERNAL SOURCES:
   CurrencyFormatter:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  CurrencyFormatter: daaf785a364036e06bfe20b0e6fca34a11da4485
+  CurrencyFormatter: 7e766e1c7b1ed113202af8a3f621109571cf45bf
 
 PODFILE CHECKSUM: 0d6be387333f7bd7106596a7b4febda860a5007a
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

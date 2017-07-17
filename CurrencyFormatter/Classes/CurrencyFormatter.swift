@@ -33,20 +33,6 @@ public class CurrencyFormatter {
     
     public init() {}
     
-    // MARK: Double Representation
-    
-    public func double(from textValue: String) -> Double {
-        let cleannedText = textValue.cleanned
-        let doubleValue = (Double(cleannedText) ?? 0)/100
-        return doubleValue
-    }
-    
-    public func double(from textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Double {
-        let oldText = (textField.text ?? "0") as NSString
-        let editedText = oldText.replacingCharacters(in: range, with: string)
-        return double(from: editedText)
-    }
-    
     // MARK: Integer Representation
     
     fileprivate func integerPart(from doubleValue: Double) -> Int {
@@ -115,10 +101,29 @@ public class CurrencyFormatter {
         let doubleValue = double(from: textField, shouldChangeCharactersIn: range, replacementString: string)
         return attributedString(from: doubleValue).string
     }
+    
+    // MARK: Double Representation
+    
+    public func double(from textValue: String) -> Double {
+        let cleannedText = textValue.cleanned
+        let doubleValue = (Double(cleannedText) ?? 0)/100
+        return doubleValue
+    }
+    
+    public func double(from textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Double {
+        let oldText = (textField.text ?? "0") as NSString
+        let editedText = oldText.replacingCharacters(in: range, with: string)
+        return double(from: editedText)
+    }
 }
 
 fileprivate extension String {
     var cleanned: String {
-        return self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let cleanned = components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        if contains("-") {
+            return "-\(cleanned)"
+        } else {
+            return cleanned
+        }
     }
 }

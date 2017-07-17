@@ -1,6 +1,6 @@
 {
   "name": "CurrencyFormatter",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "summary": "A simple currency formatter.",
   "description": "A simple currency formatter. Can be used to format UITextField too.",
   "homepage": "https://github.com/OpenCraft/CurrencyFormatter",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/OpenCraft/CurrencyFormatter.git",
-    "tag": "1.0.0"
+    "tag": "2.0.1"
   },
   "platforms": {
     "ios": "8.0"
