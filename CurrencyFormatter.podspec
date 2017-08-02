@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CurrencyFormatter'
-  s.version          = '2.0.2'
+  s.version          = '2.0.3'
   s.summary          = 'A simple currency formatter.'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ A simple currency formatter. Can be used to format UITextField too.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'CurrencyFormatter/Classes/**/*'
-  
+
   # s.resource_bundles = {
   #   'CurrencyFormatter' => ['CurrencyFormatter/Assets/*.png']
   # }
