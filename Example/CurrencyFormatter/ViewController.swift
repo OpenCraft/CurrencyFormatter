@@ -32,12 +32,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //lblString.text = formatter.string(from: -1850.98)
-        //lblString.attributedText = formatter.attributedString(from: -1850.98)
+        lblString.attributedText = formatter.attributedString(from: -1850.98)
+        //lblString.attributedText = formatter.attributedString(from: -0.01)
         //lblString.attributedText = formatter.attributedString(from: -1850.01)
         //lblString.attributedText = formatter.attributedString(from: 1850.08)
         //lblString.attributedText = formatter.attributedString(from: "-10,x1")
         //lblString.text = formatter.string(from: "-10,x1")
-        lblString.text = "\(formatter.double(from: "-10,x1"))" //101
+        //lblString.text = "\(formatter.double(from: "-10,x1"))" //101
     }
     
     // MARK: Methods

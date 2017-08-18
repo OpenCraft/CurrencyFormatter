@@ -62,7 +62,10 @@ public class CurrencyFormatter {
         formatter.usesGroupingSeparator = true
         formatter.maximumFractionDigits = 0
         
-        let integerText = formatter.string(from: NSNumber(value: integerPart(from: doubleValue))) ?? "0"
+        var integerText = formatter.string(from: NSNumber(value: integerPart(from: doubleValue))) ?? "0"
+        if integerText == "0" && doubleValue < 0.0 {
+            integerText = "-0"
+        }
         let moduleDoubleValue = doubleValue < 0.0 ? doubleValue * -1.0 : doubleValue
         var decimalText = String(format: "%03d", decimalPart(from: moduleDoubleValue))
         decimalText.remove(at: decimalText.index(before: decimalText.endIndex))
