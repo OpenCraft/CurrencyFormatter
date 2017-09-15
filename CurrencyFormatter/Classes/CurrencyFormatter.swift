@@ -35,22 +35,22 @@ public class CurrencyFormatter {
     
     // MARK: Integer Representation
     
-    fileprivate func integerPart(from doubleValue: Double) -> Int {
+    fileprivate func integerPart(from doubleValue: Double) -> Int64 {
         let numberOfPlaces = 2.0
         let multiplier = pow(10.0, numberOfPlaces)
         let rounded = round(doubleValue * multiplier) / multiplier
         
-        return Int(rounded)
+        return Int64(rounded)
     }
     
     // MARK: Decimal Representation
     
-    fileprivate func decimalPart(from doubleValue: Double) -> Int {
+    fileprivate func decimalPart(from doubleValue: Double) -> Int64 {
         let numberOfPlace1s = 3.0
         let multiplier1 = pow(10.0, numberOfPlace1s)
         let rounded1 = round(doubleValue * multiplier1) / multiplier1
         
-        return Int(rounded1 * multiplier1) - (integerPart(from: doubleValue) * Int(multiplier1))
+        return Int64(rounded1 * multiplier1) - (integerPart(from: doubleValue) * Int64(multiplier1))
     }
     
     // MARK: Attributed String
