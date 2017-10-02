@@ -49,8 +49,7 @@ public class CurrencyFormatter {
         let numberOfPlace1s = 3.0
         let multiplier1 = pow(10.0, numberOfPlace1s)
         let rounded1 = round(doubleValue * multiplier1) / multiplier1
-        
-        return Int64(rounded1 * multiplier1) - (integerPart(from: doubleValue) * Int64(multiplier1))
+        return Int64((rounded1 * multiplier1).rounded()) - (integerPart(from: doubleValue) * Int64(multiplier1))
     }
     
     // MARK: Attributed String
