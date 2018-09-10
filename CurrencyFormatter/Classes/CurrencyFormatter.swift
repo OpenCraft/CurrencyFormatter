@@ -27,9 +27,9 @@ public class CurrencyFormatter {
     public var decimalSeparator = Separator.dot
     public var thousandSeparator = Separator.comma
     public var prefix = Prefix.none
-    public var prefixAttributes: [String : Any]?
-    public var integersAttributes: [String : Any]?
-    public var decimalsAttributes: [String : Any]?
+    public var prefixAttributes: [NSAttributedStringKey : Any]?
+    public var integersAttributes: [NSAttributedStringKey : Any]?
+    public var decimalsAttributes: [NSAttributedStringKey : Any]?
     
     public init() {}
     
