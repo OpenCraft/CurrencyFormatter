@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CurrencyFormatter'
-  s.version          = '2.0.6'
+  s.version          = '3.0.0'
   s.summary          = 'A simple currency formatter.'
 
 # This description is used to generate tags and improve search results.
@@ -27,6 +27,7 @@ A simple currency formatter. Can be used to format UITextField too.
   s.author           = { 'Henrique Morbin' => 'morbin_@hotmail.com' }
   s.source           = { :git => 'https://github.com/OpenCraft/CurrencyFormatter.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.swift_version    = '4.1'
 
   s.ios.deployment_target = '8.0'
 

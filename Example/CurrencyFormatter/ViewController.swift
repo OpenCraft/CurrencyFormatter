@@ -43,12 +43,12 @@ class ViewController: UIViewController {
     
     // MARK: Methods
 
-    fileprivate final func attributes(forSize size: Double, isBold: Bool, color: UIColor) -> [String : Any]? {
+    fileprivate final func attributes(forSize size: Double, isBold: Bool, color: UIColor) -> [NSAttributedStringKey : Any]? {
         let font = isBold ? UIFont.boldSystemFont(ofSize: CGFloat(size)) : UIFont.systemFont(ofSize: CGFloat(size))
         
         return [
-            NSFontAttributeName: font,
-            NSForegroundColorAttributeName: color,
+            NSAttributedStringKey.font: font,
+            NSAttributedStringKey.foregroundColor: color,
         ]
     }
 }
